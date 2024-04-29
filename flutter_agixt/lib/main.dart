@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
       routes: {
         '/agent-management': (context) => AgentManagementPage(),
+        '/settings': (context) => SettingsPage(),
       },
     );
   }
@@ -60,6 +61,12 @@ class HomePage extends StatelessWidget {
               title: Text('Agent Management'),
               onTap: () {
                 Navigator.of(context).pushNamed('/agent-management');
+              },
+            ),
+            ListTile(
+              title: Text('Settings'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/settings');
               },
             ),
           ],
@@ -163,6 +170,73 @@ class _AgentManagementPageState extends State<AgentManagementPage> {
                 ],
               ),
             ),
+    );
+  }
+}
+
+class SettingsPage extends StatefulWidget {
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  final _apiKeyController = TextEditingController();
+  final _baseUriController = TextEditingController();
+
+  @override
+  void dispose() {
+    _apiKeyController.dispose();
+    _baseUriController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Settings',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'API Key',
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            TextField(
+              controller: _apiKeyController,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(height: 16.0),
+            Text(
+              'Base URI',
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            TextField(
+              controller: _baseUriController,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                // Save the API key and base URI
+                print('API Key: ${_apiKeyController.text}');
+                print('Base URI: ${_baseUriController.text}');
+              },
+              child: Text('Save'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
