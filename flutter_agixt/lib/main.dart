@@ -17,6 +17,10 @@ class MyApp extends StatelessWidget {
           secondary: Colors.yellow,
         ),
         textTheme: TextTheme(
+          headline4: TextStyle(
+            color: Colors.yellow,
+            fontWeight: FontWeight.bold,
+          ),
           headline6: TextStyle(
             color: Colors.yellow,
           ),
@@ -25,17 +29,58 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: ProviderScreen(),
+      home: HomePage(),
+      routes: {
+        '/agent-management': (context) => AgentManagementPage(),
+      },
     );
   }
 }
 
-class ProviderScreen extends StatefulWidget {
+class HomePage extends StatelessWidget {
   @override
-  _ProviderScreenState createState() => _ProviderScreenState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'AGIXT',
+          style: Theme.of(context).textTheme.headline4,
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/');
+              },
+            ),
+            ListTile(
+              title: Text('Agent Management'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/agent-management');
+              },
+            ),
+          ],
+        ),
+      ),
+      body: Center(
+        child: Text(
+          'Welcome to AGIXT',
+          style: Theme.of(context).textTheme.headline4,
+        ),
+      ),
+    );
+  }
 }
 
-class _ProviderScreenState extends State<ProviderScreen> {
+class AgentManagementPage extends StatefulWidget {
+  @override
+  _AgentManagementPageState createState() => _AgentManagementPageState();
+}
+
+class _AgentManagementPageState extends State<AgentManagementPage> {
   List<String> providers = [];
   String? selectedProvider;
   bool isLoading = false;
@@ -75,10 +120,8 @@ class _ProviderScreenState extends State<ProviderScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'AGIXT',
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.secondary,
-          ),
+          'Agent Management',
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
       body: isLoading
