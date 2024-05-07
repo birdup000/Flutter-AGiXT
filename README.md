@@ -1,4 +1,6 @@
 # Flutter UI for AGiXT
+This is a UI for *[AGIXT](https://github.com/Josh-XT/AGiXT)* 
+<br>
 
 This is a Flutter application that demonstrates the usage of the AGiXT SDK. The application provides a simple interface to interact with the AGiXT platform, allowing users to manage agents.
 
